@@ -1,5 +1,6 @@
 #### Imports et définition des variables globales
 #import random
+import csv 
 
 """ uighiugi"""
 
@@ -18,9 +19,15 @@ def read_data(filename):
     """
     l = []
     with open(filename, mode = 'r',  encoding='utf8') as f :
-        r = f.readlines()
-        for elt in r :
-            l.append( [ int( elt[i:i+2] ) for i in range(0, len(elt), 3) ])
+        #r = f.readlines()
+        #for elt in r :
+        #    l.append( [ int( elt[i:i+2] ) for i in range(0, len(elt), 3) ])
+        #deux methodes marchent
+        r = csv.reader(f, delimiter = ';')
+        l = list(r)
+        for elt in l :
+            for i in range (0, len(elt)) :
+                elt[i] = int(elt[i])
     return l
 
 def get_list_k(data, k):
